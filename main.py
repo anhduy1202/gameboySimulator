@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
             self.isBrowsed = True
         else:
             self.isBrowsed = False
+
     def saveImage(self):
         if self.isBrowsed:
             filename = QFileDialog.getSaveFileName(filter="JPG(*.jpg);;PNG(*.png);;TIFF(*.tiff);;BMP(*.bmp)")[0]
@@ -54,6 +55,7 @@ class MainWindow(QMainWindow):
             self.isBrowsed = False
             self.saveBtn.setChecked(False)
             print("No image to save")
+
     def clearAll(self):
         self.image = ""
         self.file = ""
