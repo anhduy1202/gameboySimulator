@@ -1,7 +1,13 @@
 # Gameboy Simulator
-> Desktop app to simulate gameboy image style
+> Desktop app to simulate gameboy image style [WIP]
 
 > Made with PyQt5
+
+# Screenshots
+<img width="974" alt="Screen Shot 2022-09-24 at 4 12 11 AM" src="https://user-images.githubusercontent.com/58461444/192094758-9e62e2ff-6f11-49c3-9fcb-f1ede5bf4ed3.png">
+
+<img width="851" alt="Screen Shot 2022-09-24 at 4 13 41 AM" src="https://user-images.githubusercontent.com/58461444/192094796-b95f8ebb-616b-4aaa-a859-0d28097602b4.png">
+
 
 # Requirements
 * Python v3.0 >=
