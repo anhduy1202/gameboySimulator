@@ -42,6 +42,8 @@
 
 **main.py** : Main file of the program that store logic of the dekstop app
 
+**imageProcessing.py** : File contains gameboy image converting algorithm
+
 **window.ui** : Design file that's created from Qt Creator to build the UI of the desktop app
 
 **windowpy.py** : Python version of window.ui
