@@ -3,36 +3,52 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import imutils
-from windowpy import Ui_MainWindow
+import imageProcessing
 from PyQt5.QtCore import *
 import cv2
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("window.ui", self)
+        self.ui = uic.loadUi("window.ui", self)
+        self.tabWidget = self.findChild(QTabWidget, "tabWidget")
+        self.tabWidget.setTabText(0, "Static Image")
+        self.tabWidget.setTabText(1, "Webcam")
         self.isBrowsed = False
         self.browseAction = self.findChild(QAction, "actionBrowse_Image")
         self.saveAsAction = self.findChild(QAction, "actionSave_As")
+        self.newStaticImageAction = self.findChild(QAction, "actionStatic_Image")
+        self.newLiveVideoAction = self.findChild(QAction, "actionLive_Video")
         self.convertBtn = self.findChild(QPushButton, "convert_pushButton")
         self.saveBtn = self.findChild(QPushButton, "save_pushButton")
         self.clearBtn = self.findChild(QPushButton, "clear_pushButton")
         self.originalImg = self.findChild(QLabel, "original_image")
         self.resultImg = self.findChild(QLabel, "result_image")
 
+        # Detect tab change
+        self.tabWidget.currentChanged.connect(self.tabChanged)
+
         # Menu action
         self.browseAction.triggered.connect(self.browseImage)
         self.saveAsAction.triggered.connect(self.saveImage)
+        self.newStaticImageAction.triggered.connect(self.insertTab)
+        self.newLiveVideoAction.triggered.connect(self.insertTab)
 
         # Button Event
         self.saveBtn.clicked.connect(self.saveImage)
         self.clearBtn.clicked.connect(self.clearAll)
-
+        tabs = self.tabWidget
+        tabs.tabCloseRequested.connect(lambda index: tabs.removeTab(index))
 
         # Convert image
         self.convertBtn.clicked.connect(self.convertImage)
 
+    def tabChanged(self):
+        print("Tab was changed to: ", self.tabWidget.currentIndex())
 
+    def insertTab(self):
+        tabName = self.sender()
+        self.tabWidget.addTab(QWidget(), tabName.text())
     def browseImage(self):
         self.isBrowsed = True
         self.file = QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
@@ -69,9 +85,8 @@ class MainWindow(QMainWindow):
     def convertImage(self):
         if self.isBrowsed:
             image = imutils.resize(self.originalImage, width=640)
-            grayscale = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-            self.result = grayscale
-            self.displayImage(grayscale, self.resultImg, QImage.Format_Grayscale8)
+            self.result = imageProcessing.toGameBoyImage(image)
+            self.displayImage(self.result, self.resultImg, QImage.Format_Grayscale8)
         else:
             self.isBrowsed = False
             self.convertBtn.setChecked(False)
@@ -80,7 +95,7 @@ class MainWindow(QMainWindow):
     def setOriginal(self, image):
         self.originalImage = image
         image = imutils.resize(image, width=640)
-        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        frame = imageProcessing.toRGB(image)
         self.displayImage(frame, self.originalImg, QImage.Format_RGB888)
 
     def displayImage(self, frame, destination, imgFormat):
