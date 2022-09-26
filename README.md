@@ -1,12 +1,14 @@
 # Gameboy Simulator
 > Desktop app to simulate gameboy image style [WIP]
 
-> Made with PyQt5
+> Made with PyQt5 and openCV
 
 # Screenshots
-<img width="974" alt="Screen Shot 2022-09-24 at 4 12 11 AM" src="https://user-images.githubusercontent.com/58461444/192094758-9e62e2ff-6f11-49c3-9fcb-f1ede5bf4ed3.png">
 
-<img width="851" alt="Screen Shot 2022-09-24 at 4 13 41 AM" src="https://user-images.githubusercontent.com/58461444/192094796-b95f8ebb-616b-4aaa-a859-0d28097602b4.png">
+<img width="983" alt="Screen Shot 2022-09-25 at 7 22 58 PM" src="https://user-images.githubusercontent.com/58461444/192181497-7a517a3f-1565-4bfe-9783-8f14d5672e3b.png">
+
+
+<img width="1039" alt="Screen Shot 2022-09-25 at 7 16 19 PM" src="https://user-images.githubusercontent.com/58461444/192181412-0ebebeb5-94bd-4c27-8b4e-5cc955610518.png">
 
 
 # Requirements
