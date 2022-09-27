@@ -7,6 +7,7 @@ import imageProcessing
 from PyQt5.QtCore import *
 import cv2
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -49,7 +50,9 @@ class MainWindow(QMainWindow):
     def insertTab(self):
         tabName = self.sender()
         self.tabWidget.addTab(QWidget(), tabName.text())
+
     def browseImage(self):
+        print("    This is purposely format incorrectly    ")
         self.isBrowsed = True
         self.file = QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
         if self.file:
@@ -61,12 +64,14 @@ class MainWindow(QMainWindow):
 
     def saveImage(self):
         if self.isBrowsed:
-            filename = QFileDialog.getSaveFileName(filter="JPG(*.jpg);;PNG(*.png);;TIFF(*.tiff);;BMP(*.bmp)")[0]
+            filename = QFileDialog.getSaveFileName(
+                filter="JPG(*.jpg);;PNG(*.png);;TIFF(*.tiff);;BMP(*.bmp)"
+            )[0]
             if filename:
                 cv2.imwrite(filename, self.result)
-                print(f'Imaged saved as: {filename}')
+                print(f"Imaged saved as: {filename}")
             else:
-                print('Provide image name')
+                print("Provide image name")
         else:
             self.isBrowsed = False
             self.saveBtn.setChecked(False)
@@ -99,10 +104,13 @@ class MainWindow(QMainWindow):
         self.displayImage(frame, self.originalImg, QImage.Format_RGB888)
 
     def displayImage(self, frame, destination, imgFormat):
-        image = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], imgFormat)
+        image = QImage(
+            frame, frame.shape[1], frame.shape[0], frame.strides[0], imgFormat
+        )
         destination.setPixmap(QPixmap.fromImage(image))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()

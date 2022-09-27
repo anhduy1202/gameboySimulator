@@ -1,3 +1,4 @@
+black==22.8.1.dev20+g6b42c2b
 certifi==2022.9.14
 charset-normalizer==2.1.1
 docopt==0.6.2
