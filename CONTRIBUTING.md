@@ -11,6 +11,7 @@
 1. Create a new branch
 
 ``` git checkout -b {your branch name}```
+
 2. Make sure you're in the right branch
 
 ``` git branch```
@@ -29,10 +30,12 @@ git push
 
 5. Open a PR
 
-![](../../../../var/folders/sw/3rzv02vn7gg547pwzby8vzf40000gn/T/TemporaryItems/NSIRD_screencaptureui_jLAPS5/Screen Shot 2022-09-28 at 2.45.42 PM.png)
+<img width="808" alt="Screen Shot 2022-09-28 at 2 45 42 PM" src="https://user-images.githubusercontent.com/58461444/192895745-2d11071b-931c-4d1a-af4b-32dc904175ce.png">
 
-![](../../../../var/folders/sw/3rzv02vn7gg547pwzby8vzf40000gn/T/TemporaryItems/NSIRD_screencaptureui_N5EkkH/Screen Shot 2022-09-28 at 2.46.21 PM.png)
+<img width="1145" alt="Screen Shot 2022-09-28 at 2 46 21 PM" src="https://user-images.githubusercontent.com/58461444/192895768-89b76832-7040-4e29-9e30-8435427b4735.png">
+
 
 ### Request review from other people 
 
-![](../Screen Shot 2022-09-28 at 2.47.14 PM.png)
+<img width="1125" alt="Screen Shot 2022-09-28 at 2 47 14 PM" src="https://user-images.githubusercontent.com/58461444/192895799-1dc6fed9-82e7-4834-b46c-dff0b68ae401.png">
+
