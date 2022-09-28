@@ -22,17 +22,17 @@
 
 ``` git clone https://github.com/anhduy1202/gameboySimulator.git```
 
-2. Create virtual environment 
+2. Install Pipenv 
 
-``` python3 -m venv venv```
+``` pip install --user pipenv ```
 
-3. Activate virtual environment ( depend on where your venv folder )
+3. Activate Pipenv
 
-``` source venv/bin/activate ```
+``` pipenv shell ```
 
-4. Install packages
+4. Install packages from Pipfile.lock
 
-``` pip install -r requirements.txt ```
+``` pipenv sync ```
 
 5. Run the program
 
@@ -45,7 +45,5 @@
 **imageProcessing.py** : File contains gameboy image converting algorithm
 
 **window.ui** : Design file that's created from Qt Creator to build the UI of the desktop app
-
-**windowpy.py** : Python version of window.ui
 
 **requirements.txt** : Requirements file to help downloading Python packages
