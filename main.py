@@ -52,9 +52,7 @@ class MainWindow(QMainWindow):
         self.tabWidget.addTab(QWidget(), tabName.text())
 
     def browseImage(self):
-        print("    This is purposely format incorrectly   "
-
-              )
+        print("    This is purposely format incorrectly   ")
         self.isBrowsed = True
         self.file = QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
         if self.file:
