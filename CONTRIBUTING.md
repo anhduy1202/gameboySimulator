@@ -16,7 +16,7 @@
 
 ``` git branch```
 
-3. Runs the autoformatter ( or elese it may fail the formatting check when you submit your PR )
+3. After you've made your change: Runs the autoformatter ( or else it may fail the formatting check when you submit your PR )
 
 `` pipenv run format``
 
