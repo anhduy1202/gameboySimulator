@@ -21,7 +21,7 @@ def toRGB(image):
 
 def downScale(image):
     height, width = image.shape[:2]
-    w, h = (125, 125)
+    w, h = (128, 128)
     temp = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)
     result = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     return result
