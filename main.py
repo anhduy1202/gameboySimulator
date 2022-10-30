@@ -1,39 +1,19 @@
 import sys
-import numpy as np
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import imutils
 import imageProcessing
+from webcamMode import WebcamMode
 from PyQt5.QtCore import *
 import cv2
-
-class VideoThread(QThread):
-    changePixmapSignal = pyqtSignal(np.ndarray)
-    def __init__(self):
-        super().__init__()
-        self.runFlag = True
-
-    def run(self):
-        # capture from web cam
-        cap = cv2.VideoCapture(0)
-        while self.runFlag:
-            ret, cvImg = cap.read()
-            if ret:
-                self.changePixmapSignal.emit(cvImg)
-        # shut down capture system
-        cap.release()
-
-    def stop(self):
-        """Sets run flag to False and waits for thread to finish"""
-        self.runFlag = False
-        self.wait()
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = uic.loadUi("window.ui", self)
         self.tabWidget = self.findChild(QTabWidget, "tabWidget")
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget.setTabText(0, "Static Image")
         self.tabWidget.setTabText(1, "Webcam")
         self.isBrowsed = False
@@ -46,13 +26,12 @@ class MainWindow(QMainWindow):
         self.clearBtn = self.findChild(QPushButton, "clear_pushButton")
         self.originalImg = self.findChild(QLabel, "original_image")
         self.resultImg = self.findChild(QLabel, "result_image")
+
         # Webcam
         self.originalWebcam = self.findChild(QLabel, "original_webcam")
         self.resultWebcam = self.findChild(QLabel, "result_webcam")
-        self.originalWebcam = self.findChild(QLabel, "original_webcam")
-        self.resultWebcam = self.findChild(QLabel, "result_webcam")
         self.startBtn = self.findChild(QPushButton, "startwebcam_pushButton")
-        self.startBtn.clicked.connect(self.startVideo)
+        self.secondTab = WebcamMode(self)
 
         # Detect tab change
         self.tabWidget.currentChanged.connect(self.tabChanged)
@@ -135,28 +114,6 @@ class MainWindow(QMainWindow):
             frame, frame.shape[1], frame.shape[0], frame.strides[0], imgFormat
         )
         destination.setPixmap(QPixmap.fromImage(image))
-
-
-    def startVideo(self):
-        print("cliicked")
-        self.thread = VideoThread()
-        self.thread.changePixmapSignal.connect(self.updateFrame)
-        self.thread.start()
-
-    def updateFrame(self, img):
-        qtImg = self.convertToQt(img)
-        self.originalWebcam.setPixmap(qtImg)
-
-    def convertToQt(self, cvImg):
-        """Convert from an opencv image to QPixmap"""
-        rgbImage = cv2.cvtColor(cvImg, cv2.COLOR_BGR2RGB)
-        flippedImage = cv2.flip(rgbImage,1)
-        h, w, ch = flippedImage.shape
-        bytesPerLine = ch * w
-        convertToQtFormat = QImage(flippedImage.data, w, h, bytesPerLine, QImage.Format_RGB888)
-        p = convertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
-        return QPixmap.fromImage(p)
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
