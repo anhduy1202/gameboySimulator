@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import imutils
 import imageProcessing
+from webcamMode import WebcamMode
 from PyQt5.QtCore import *
 import cv2
 
@@ -13,6 +14,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.ui = uic.loadUi("window.ui", self)
         self.tabWidget = self.findChild(QTabWidget, "tabWidget")
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget.setTabText(0, "Static Image")
         self.tabWidget.setTabText(1, "Webcam")
         self.isBrowsed = False
@@ -25,6 +27,12 @@ class MainWindow(QMainWindow):
         self.clearBtn = self.findChild(QPushButton, "clear_pushButton")
         self.originalImg = self.findChild(QLabel, "original_image")
         self.resultImg = self.findChild(QLabel, "result_image")
+
+        # Webcam
+        self.originalWebcam = self.findChild(QLabel, "original_webcam")
+        self.resultWebcam = self.findChild(QLabel, "result_webcam")
+        self.startBtn = self.findChild(QPushButton, "startwebcam_pushButton")
+        self.secondTab = WebcamMode(self)
 
         # Detect tab change
         self.tabWidget.currentChanged.connect(self.tabChanged)
