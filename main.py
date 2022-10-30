@@ -8,6 +8,7 @@ from webcamMode import WebcamMode
 from PyQt5.QtCore import *
 import cv2
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -114,6 +115,7 @@ class MainWindow(QMainWindow):
             frame, frame.shape[1], frame.shape[0], frame.strides[0], imgFormat
         )
         destination.setPixmap(QPixmap.fromImage(image))
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

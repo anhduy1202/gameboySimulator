@@ -4,8 +4,10 @@ from PyQt5.QtCore import *
 import numpy as np
 import cv2
 
+
 class VideoThread(QThread):
     changePixmapSignal = pyqtSignal(np.ndarray)
+
     def __init__(self):
         super().__init__()
         self.runFlag = True
@@ -25,6 +27,7 @@ class VideoThread(QThread):
         self.runFlag = False
         self.wait()
 
+
 class WebcamMode(QWidget):
     def __init__(self, MainWindow):
         QWidget.__init__(self)
@@ -43,10 +46,11 @@ class WebcamMode(QWidget):
     def convertToQt(self, cvImg):
         """Convert from an opencv image to QPixmap"""
         rgbImage = cv2.cvtColor(cvImg, cv2.COLOR_BGR2RGB)
-        flippedImage = cv2.flip(rgbImage,1)
+        flippedImage = cv2.flip(rgbImage, 1)
         h, w, ch = flippedImage.shape
         bytesPerLine = ch * w
-        convertToQtFormat = QImage(flippedImage.data, w, h, bytesPerLine, QImage.Format_RGB888)
+        convertToQtFormat = QImage(
+            flippedImage.data, w, h, bytesPerLine, QImage.Format_RGB888
+        )
         p = convertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
-
