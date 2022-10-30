@@ -24,7 +24,7 @@
 
 2. Install Pipenv 
 
-``` pip install --user pipenv ```
+``` pip install --user pipenv ``` or ``` pip3 install --user pipenv ``` 
 
 3. Activate Pipenv
 
@@ -38,9 +38,14 @@
 
 ``` python main.py ```
 
+# Contributing
+## Check [CONTRIBUTING.MD](https://github.com/anhduy1202/gameboySimulator/blob/master/CONTRIBUTING.md) to contribute to the project
+
 # Files Description
 
 **main.py** : Main file of the program that store logic of the dekstop app
+
+**webcamMode.py** : File for Webcam mode option
 
 **imageProcessing.py** : File contains gameboy image converting algorithm
 
