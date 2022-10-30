@@ -33,19 +33,19 @@ class WebcamMode(QWidget):
         QWidget.__init__(self)
         self.originalWebcam = MainWindow.originalWebcam
         self.hasStarted = False
-        self.startBtn = MainWindow.startBtn
-        self.startBtn.clicked.connect(self.startVideo)
+        self.powerBtn = MainWindow.startBtn
+        self.powerBtn.clicked.connect(self.startVideo)
 
     def startVideo(self):
         if not self.hasStarted:
             self.hasStarted = True
-            self.startBtn.setText("Stop")
+            self.powerBtn.setText("Stop")
             self.thread = VideoThread()
             self.thread.changePixmapSignal.connect(self.updateFrame)
             self.thread.start()
         else:
             self.hasStarted = False
-            self.startBtn.setText("Start")
+            self.powerBtn.setText("Start")
             self.thread.stop()
 
     def updateFrame(self, img):
