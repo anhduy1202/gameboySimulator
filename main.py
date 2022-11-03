@@ -11,7 +11,6 @@ SCALED_WIDTH = 640
 SCALED_HEIGHT = 480
 TARGET_AREA = 64000.0
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -98,15 +97,16 @@ class MainWindow(QMainWindow):
         self.originalImg.clear()
         self.resultImg.clear()
 
+    def resizeImage(self, inputImage):
+        ratio = float(inputImage.shape[1]) / float(inputImage.shape[0])
+        resizedHeight = int(math.sqrt(TARGET_AREA / ratio) + 0.5)
+        resizedWidth = int((resizedHeight * ratio) + 0.5)
+        image = cv2.resize(inputImage, (resizedWidth, resizedHeight))
+        return image
     def convertImage(self):
         if self.isBrowsed:
-            ratio = float(self.originalImage.shape[1]) / float(
-                self.originalImage.shape[0]
-            )
-            resizedHeight = int(math.sqrt(TARGET_AREA / ratio) + 0.5)
-            resizedWidth = int((resizedHeight * ratio) + 0.5)
-            image = cv2.resize(self.originalImage, (resizedWidth, resizedHeight))
-            self.result = imageProcessing.toGameBoyImage(image)
+            resizedImage = self.resizeImage(self.originalImage)
+            self.result = imageProcessing.toGameBoyImage(resizedImage)
             self.displayImage(self.result, self.resultImg, QImage.Format_Grayscale8)
         else:
             self.isBrowsed = False
@@ -115,10 +115,7 @@ class MainWindow(QMainWindow):
 
     def setOriginal(self, image):
         self.originalImage = image
-        ratio = float(self.originalImage.shape[1]) / float(self.originalImage.shape[0])
-        resizedHeight = int(math.sqrt(TARGET_AREA / ratio) + 0.5)
-        resizedWidth = int((resizedHeight * ratio) + 0.5)
-        image = cv2.resize(self.originalImage, (resizedWidth, resizedHeight))
+        image = self.resizeImage(self.originalImage)
         frame = imageProcessing.toRGB(image)
         self.displayImage(frame, self.originalImg, QImage.Format_RGB888)
 
