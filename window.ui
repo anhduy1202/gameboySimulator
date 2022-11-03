@@ -206,6 +206,25 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="convertwebcam_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>350</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 500 13pt &quot;Futura&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Convert</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
