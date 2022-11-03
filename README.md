@@ -5,10 +5,9 @@
 
 # Screenshots
 
-<img width="983" alt="Screen Shot 2022-09-25 at 7 22 58 PM" src="https://user-images.githubusercontent.com/58461444/192181497-7a517a3f-1565-4bfe-9783-8f14d5672e3b.png">
+<img width="640" alt="Screen Shot 2022-09-25 at 7 22 58 PM" src="https://user-images.githubusercontent.com/58461444/192181497-7a517a3f-1565-4bfe-9783-8f14d5672e3b.png">
 
-
-<img width="1039" alt="Screen Shot 2022-09-25 at 7 16 19 PM" src="https://user-images.githubusercontent.com/58461444/192181412-0ebebeb5-94bd-4c27-8b4e-5cc955610518.png">
+<img width="640" alt="Screen Shot 2022-11-03 at 1 19 49 AM" src="https://user-images.githubusercontent.com/58461444/199675276-871e4a60-2af9-49b5-a2fd-52a00bcec19d.png">
 
 
 # Requirements
