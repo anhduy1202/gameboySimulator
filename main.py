@@ -32,6 +32,7 @@ class MainWindow(QMainWindow):
         self.originalWebcam = self.findChild(QLabel, "original_webcam")
         self.resultWebcam = self.findChild(QLabel, "result_webcam")
         self.startBtn = self.findChild(QPushButton, "startwebcam_pushButton")
+        self.convertWebcamBtn = self.findChild(QPushButton, "convertwebcam_pushButton")
         self.secondTab = WebcamMode(self)
 
         # Detect tab change
