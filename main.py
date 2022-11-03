@@ -1,12 +1,13 @@
+import math
 import sys
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import imutils
 import imageProcessing
 from webcamMode import WebcamMode
-from PyQt5.QtCore import *
 import cv2
+
+TARGET_AREA = 64000.0
 
 
 class MainWindow(QMainWindow):
@@ -95,10 +96,17 @@ class MainWindow(QMainWindow):
         self.originalImg.clear()
         self.resultImg.clear()
 
+    def resizeImage(self, inputImage):
+        ratio = float(inputImage.shape[1]) / float(inputImage.shape[0])
+        resizedHeight = int(math.sqrt(TARGET_AREA / ratio) + 0.5)
+        resizedWidth = int((resizedHeight * ratio) + 0.5)
+        image = cv2.resize(inputImage, (resizedWidth, resizedHeight))
+        return image
+
     def convertImage(self):
         if self.isBrowsed:
-            image = imutils.resize(self.originalImage, width=640)
-            self.result = imageProcessing.toGameBoyImage(image)
+            resizedImage = self.resizeImage(self.originalImage)
+            self.result = imageProcessing.toGameBoyImage(resizedImage)
             self.displayImage(self.result, self.resultImg, QImage.Format_Grayscale8)
         else:
             self.isBrowsed = False
@@ -107,7 +115,7 @@ class MainWindow(QMainWindow):
 
     def setOriginal(self, image):
         self.originalImage = image
-        image = imutils.resize(image, width=640)
+        image = self.resizeImage(self.originalImage)
         frame = imageProcessing.toRGB(image)
         self.displayImage(frame, self.originalImg, QImage.Format_RGB888)
 
