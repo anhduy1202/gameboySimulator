@@ -1,10 +1,11 @@
 import cv2
+import numpy as np
 
 
 def toGameBoyImage(image):
     firstStep = downScale(image)
     secondStep = toGrayScale(firstStep)
-    thirdStep = threShold(secondStep)
+    thirdStep = fourShades(secondStep)
     return thirdStep
 
 
@@ -30,3 +31,10 @@ def downScale(image):
 def threShold(image):
     _, result = cv2.threshold(image, 55, 255, cv2.THRESH_BINARY)
     return result
+
+
+def fourShades(image):
+    """Reduce colors of grayscale image to be 4 shades of gray."""
+    # TODO
+    print(image.shape)
+    return image
