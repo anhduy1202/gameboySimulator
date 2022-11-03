@@ -7,8 +7,6 @@ import imageProcessing
 from webcamMode import WebcamMode
 import cv2
 
-SCALED_WIDTH = 640
-SCALED_HEIGHT = 480
 TARGET_AREA = 64000.0
 
 
