@@ -11,6 +11,7 @@ SCALED_WIDTH = 640
 SCALED_HEIGHT = 480
 TARGET_AREA = 64000.0
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -103,6 +104,7 @@ class MainWindow(QMainWindow):
         resizedWidth = int((resizedHeight * ratio) + 0.5)
         image = cv2.resize(inputImage, (resizedWidth, resizedHeight))
         return image
+
     def convertImage(self):
         if self.isBrowsed:
             resizedImage = self.resizeImage(self.originalImage)
