@@ -1,12 +1,15 @@
+import math
 import sys
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import imutils
 import imageProcessing
 from webcamMode import WebcamMode
-from PyQt5.QtCore import *
 import cv2
+
+SCALED_WIDTH = 640
+SCALED_HEIGHT = 480
+TARGET_AREA = 64000.0
 
 
 class MainWindow(QMainWindow):
@@ -97,7 +100,12 @@ class MainWindow(QMainWindow):
 
     def convertImage(self):
         if self.isBrowsed:
-            image = imutils.resize(self.originalImage, width=640)
+            ratio = float(self.originalImage.shape[1]) / float(
+                self.originalImage.shape[0]
+            )
+            resizedHeight = int(math.sqrt(TARGET_AREA / ratio) + 0.5)
+            resizedWidth = int((resizedHeight * ratio) + 0.5)
+            image = cv2.resize(self.originalImage, (resizedWidth, resizedHeight))
             self.result = imageProcessing.toGameBoyImage(image)
             self.displayImage(self.result, self.resultImg, QImage.Format_Grayscale8)
         else:
@@ -107,7 +115,10 @@ class MainWindow(QMainWindow):
 
     def setOriginal(self, image):
         self.originalImage = image
-        image = imutils.resize(image, width=640)
+        ratio = float(self.originalImage.shape[1]) / float(self.originalImage.shape[0])
+        resizedHeight = int(math.sqrt(TARGET_AREA / ratio) + 0.5)
+        resizedWidth = int((resizedHeight * ratio) + 0.5)
+        image = cv2.resize(self.originalImage, (resizedWidth, resizedHeight))
         frame = imageProcessing.toRGB(image)
         self.displayImage(frame, self.originalImg, QImage.Format_RGB888)
 

@@ -28,5 +28,5 @@ def downScale(image):
 
 
 def threShold(image):
-    _, result = cv2.threshold(image, 55, 255, cv2.THRESH_BINARY)
+    _, result = cv2.threshold(image, 95, 255, cv2.THRESH_BINARY)
     return result
