@@ -17,12 +17,14 @@ class MainWindow(QMainWindow):
         self.tabWidget = self.findChild(QTabWidget, "tabWidget")
         self.tabWidget.setCurrentIndex(0)
         self.tabWidget.setTabText(0, "Static Image")
-        self.tabWidget.setTabText(1, "Webcam")
+        self.tabWidget.setTabText(1, "Webcam Video")
+        self.staticImgTab = self.findChild(QWidget, "firstTab")
+        self.webcamTab = self.findChild(QWidget, "secondTab")
         self.isBrowsed = False
         self.browseAction = self.findChild(QAction, "actionBrowse_Image")
         self.saveAsAction = self.findChild(QAction, "actionSave_As")
         self.newStaticImageAction = self.findChild(QAction, "actionStatic_Image")
-        self.newLiveVideoAction = self.findChild(QAction, "actionLive_Video")
+        self.newWebcamAction = self.findChild(QAction, "actionWebcam_Video")
         self.convertBtn = self.findChild(QPushButton, "convert_pushButton")
         self.saveBtn = self.findChild(QPushButton, "save_pushButton")
         self.clearBtn = self.findChild(QPushButton, "clear_pushButton")
@@ -42,8 +44,8 @@ class MainWindow(QMainWindow):
         # Menu action
         self.browseAction.triggered.connect(self.browseImage)
         self.saveAsAction.triggered.connect(self.saveImage)
-        self.newStaticImageAction.triggered.connect(self.insertTab)
-        self.newLiveVideoAction.triggered.connect(self.insertTab)
+        self.newStaticImageAction.triggered.connect(self.insertStaticImgTab)
+        self.newWebcamAction.triggered.connect(self.insertWebcamTab)
 
         # Button Event
         self.saveBtn.clicked.connect(self.saveImage)
@@ -57,9 +59,17 @@ class MainWindow(QMainWindow):
     def tabChanged(self):
         print("Tab was changed to: ", self.tabWidget.currentIndex())
 
-    def insertTab(self):
-        tabName = self.sender()
-        self.tabWidget.addTab(QWidget(), tabName.text())
+    def setLatestTab(self):
+        lastIndex = len(self.tabWidget) - 1
+        self.tabWidget.setCurrentIndex(lastIndex)
+
+    def insertWebcamTab(self):
+        self.tabWidget.addTab(self.webcamTab, "Webcam Video")
+        self.setLatestTab()
+
+    def insertStaticImgTab(self):
+        self.tabWidget.addTab(self.staticImgTab, "Static Image")
+        self.setLatestTab()
 
     def browseImage(self):
         self.isBrowsed = True

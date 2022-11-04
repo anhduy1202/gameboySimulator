@@ -246,7 +246,7 @@
       <string>New</string>
      </property>
      <addaction name="actionStatic_Image"/>
-     <addaction name="actionLive_Video"/>
+     <addaction name="actionWebcam_Video"/>
     </widget>
     <addaction name="actionBrowse_Image"/>
     <addaction name="separator"/>
@@ -283,9 +283,9 @@
     <string>Static Image</string>
    </property>
   </action>
-  <action name="actionLive_Video">
+  <action name="actionWebcam_Video">
    <property name="text">
-    <string>Live Video</string>
+    <string>Webcam Video</string>
    </property>
   </action>
  </widget>
